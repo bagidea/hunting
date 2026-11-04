@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hunting by BAGIDEA | EA สำหรับ MetaTrader 5</title>
+<meta name="description" content="Hunting คือ Expert Advisor สำหรับ MetaTrader 5 รวมสัญญาณแท่งเทียนและ Trend Zone 4 สี พร้อมแผงควบคุมบนกราฟและระบบพรีเซ็ต">
+<meta property="og:title" content="Hunting by BAGIDEA">
+<meta property="og:description" content="EA สำหรับ MetaTrader 5 ที่ตั้งค่าทุกอย่างได้จากแผงควบคุมบนกราฟ">
+<meta property="og:image" content="assets/img/hunting-icon.png">
+<meta name="theme-color" content="#0b0f14">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/img/hunting-logo-32.png">
+<link rel="apple-touch-icon" href="assets/img/hunting-logo-192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<a class="skip" href="#main">ข้ามไปเนื้อหา</a>
+
+<header class="nav">
+  <a class="brand" href="#top">
+    <img src="assets/img/hunting-logo-64.png" alt="" width="32" height="32">
+    <span>HUNTING</span>
+  </a>
+  <nav aria-label="เมนูหลัก">
+    <a href="#features">ความสามารถ</a>
+    <a href="#zones">Trend Zone</a>
+    <a href="#panel">แผงควบคุม</a>
+    <a href="#install">ติดตั้ง</a>
+    <a class="nav-cta" href="#download">ดาวน์โหลด</a>
+  </nav>
+</header>
+
+<main id="main">
+<section class="hero" id="top">
+  <div class="hero-copy">
+    <p class="badge"><span class="dot"></span>Beta สำหรับทดสอบบนบัญชีเดโม</p>
+    <h1>ล่าจังหวะเทรด<br><em>อย่างมีระบบ</em></h1>
+    <p class="lead">Hunting คือ EA สำหรับ MetaTrader 5 ที่รวมสัญญาณแท่งเทียนกับ Trend Zone 4 สีไว้ในตัวเดียว ตั้งค่าได้ทุกอย่างจากแผงควบคุมบนกราฟ ไม่ต้องเปิดหน้าต่าง Inputs</p>
+    <div class="cta">
+      <a class="btn primary" href="#download">ดาวน์โหลด EA</a>
+      <a class="btn ghost" href="#install">วิธีติดตั้ง</a>
+    </div>
+    <ul class="facts">
+      <li><strong>MT5</strong><span>Hedging และ Netting</span></li>
+      <li><strong>4</strong><span>รูปแบบสัญญาณ</span></li>
+      <li><strong>9</strong><span>พรีเซ็ตพร้อมใช้</span></li>
+    </ul>
+  </div>
+  <div class="hero-shot">
+    <img class="hero-chart" src="assets/img/zones-chart.png" alt="กราฟ EURUSD ที่แท่งเทียนถูกระบายสีตาม Trend Zone พร้อมแถบ EMA" width="1100" height="740">
+    <img class="hero-panel" src="assets/img/panel-home.png" alt="แผงควบคุม Hunting หน้าหลัก แสดงสถานะ กำไรขาดทุน และสัญญาณล่าสุด">
+  </div>
+</section>
+
+<section id="features" class="section">
+  <p class="eyebrow">ความสามารถ</p>
+  <h2>ทุกอย่างที่ต้องใช้ อยู่ใน EA เดียว</h2>
+  <div class="grid">
+    <article class="card"><h3>สัญญาณแท่งเทียน 3 แบบ</h3><p>Doji Reversal, Trend Continuation และ Pin Bar Breakout เปิดปิดแยกกันได้ และปรับความไวได้</p></article>
+    <article class="card"><h3>Trend Zone 4 สี</h3><p>ระบายสีแท่งเทียนจาก EMA 12/26 ใช้กรองสัญญาณ เข้าไม้เมื่อโซนเปลี่ยน และปิดไม้ตามโซนได้</p></article>
+    <article class="card"><h3>เทรดทีละไม้หรือซ้อนไม้</h3><p>กำหนดจำนวนไม้สูงสุดและระยะห่างขั้นต่ำ บนบัญชี Netting ระบบจะจำกัดที่ครั้งละ 1 ไม้ให้เอง</p></article>
+    <article class="card"><h3>ตัวป้องกันความเสี่ยง</h3><p>จำกัดขาดทุนรายวัน จำกัด Spread กำหนดเวลาเทรด และตรวจ Margin กับข้อกำหนดโบรกเกอร์ก่อนส่งออเดอร์</p></article>
+    <article class="card"><h3>พรีเซ็ตนำเข้า/ส่งออกได้</h3><p>บันทึกการตั้งค่าเป็น .json เพื่อแชร์ และ .set เพื่อใช้ใน Strategy Tester ไฟล์ใช้ร่วมกันได้ทุก Terminal ในเครื่อง</p></article>
+    <article class="card"><h3>เริ่มต้นแบบปลอดภัย</h3><p>แนบ EA แล้วจะยังไม่เปิดไม้จนกว่าจะกด "เริ่มล่า" และรอแท่งเทียนปิดก่อนเสมอ ไม่เข้าไม้จากสัญญาณเก่า</p></article>
+  </div>
+</section>
+
+<section id="zones" class="section">
+  <p class="eyebrow">Trend Zone</p>
+  <h2>อ่านเทรนด์ได้จากสีแท่งเทียน</h2>
+  <p class="sub">สีของแต่ละแท่งมาจากความสัมพันธ์ของ EMA เร็ว (12) EMA ช้า (26) และราคาปิด ปรับค่า EMA ได้จากหน้า "โซน"</p>
+  <div class="zones">
+    <article class="zone z-green"><span class="candle"></span><div><h3>เขียว: ขาขึ้น</h3><p>EMA 12 อยู่เหนือ EMA 26 และราคาปิดอยู่เหนือ EMA 12</p><small>EA เปิด Buy ได้เมื่อโซนเปลี่ยนเป็นสีนี้</small></div></article>
+    <article class="zone z-yellow"><span class="candle"></span><div><h3>เหลือง: ขาขึ้นอ่อนแรง</h3><p>EMA 12 ยังอยู่เหนือ EMA 26 แต่ราคาปิดหลุดต่ำกว่า EMA 12</p><small>สัญญาณเตือน เลือกให้ปิด Buy ที่จุดนี้ได้</small></div></article>
+    <article class="zone z-red"><span class="candle"></span><div><h3>แดง: ขาลง</h3><p>EMA 12 อยู่ใต้ EMA 26 และราคาปิดอยู่ใต้ EMA 12</p><small>EA เปิด Sell ได้เมื่อโซนเปลี่ยนเป็นสีนี้</small></div></article>
+    <article class="zone z-blue"><span class="candle"></span><div><h3>ฟ้า: ขาลงเริ่มฟื้น</h3><p>EMA 12 ยังอยู่ใต้ EMA 26 แต่ราคาปิดยืนเหนือ EMA 12 ได้</p><small>สัญญาณเตือน เลือกให้ปิด Sell ที่จุดนี้ได้</small></div></article>
+  </div>
+  <figure class="wide-shot">
+    <img src="assets/img/zones-chart.png" alt="ตัวอย่างกราฟ EURUSD H1 ที่แสดงแท่งเทียนสีตามโซนและแถบ EMA" loading="lazy" width="1100" height="740">
+    <figcaption>ภาพจาก MetaTrader 5 จริง ใช้แสดงลักษณะการแสดงผลเท่านั้น ไม่ได้บอกถึงผลการเทรด</figcaption>
+  </figure>
+</section>
+
+<section id="panel" class="section">
+  <p class="eyebrow">แผงควบคุม</p>
+  <h2>ตั้งค่าครบ โดยไม่ต้องออกจากกราฟ</h2>
+  <p class="sub">ลากย้ายได้ ย่อได้ เลื่อนด้วยลูกกลิ้งเมาส์ และมีผลทันทีเมื่อเปลี่ยนค่า</p>
+  <div class="tabs" role="tablist" aria-label="หน้าของแผงควบคุม">
+    <button role="tab" aria-selected="true" data-shot="panel-home" data-text="ดูสถานะ กำไรขาดทุน จำนวนไม้ และ Spread ได้ในหน้าเดียว พร้อมปุ่มเริ่มหรือหยุด EA และปุ่มปิดไม้ทั้งหมด">หน้าหลัก</button>
+    <button role="tab" aria-selected="false" data-shot="panel-strategy" data-text="เลือกทิศทาง Buy, Sell หรือทั้งคู่ เปิดปิดรูปแบบสัญญาณ และปรับความไวของแต่ละแบบ">กลยุทธ์</button>
+    <button role="tab" aria-selected="false" data-shot="panel-zone" data-text="ตั้งค่า EMA แสดงแท่งสีบนกราฟ เปิดการเข้าไม้เมื่อโซนเปลี่ยน กรองสัญญาณ และเลือกวิธีปิดไม้">โซน</button>
+    <button role="tab" aria-selected="false" data-shot="panel-risk" data-text="กำหนด Lot, SL, TP โหมดซ้อนไม้ Spread สูงสุด ขีดจำกัดขาดทุนรายวัน และเวลาเทรด กดที่ตัวเลขเพื่อพิมพ์ค่าเองได้">ความเสี่ยง</button>
+    <button role="tab" aria-selected="false" data-shot="panel-presets" data-text="ใช้พรีเซ็ตสำเร็จรูป 9 แบบ หรือบันทึกของตัวเองแล้วส่งออกเป็น .json และ .set">พรีเซ็ต</button>
+    <button role="tab" aria-selected="false" data-shot="panel-system" data-text="สลับภาษาไทยหรืออังกฤษ ปรับขนาดแผง แสดงลูกศรจุดเข้าเทรด และตั้ง Magic Number">ระบบ</button>
+  </div>
+  <div class="panel-view">
+    <div class="panel-frame"><img id="panel-img" src="assets/img/panel-home.png" alt="แผงควบคุม Hunting" loading="lazy"></div>
+    <p id="panel-text" aria-live="polite">ดูสถานะ กำไรขาดทุน จำนวนไม้ และ Spread ได้ในหน้าเดียว พร้อมปุ่มเริ่มหรือหยุด EA และปุ่มปิดไม้ทั้งหมด</p>
+  </div>
+</section>
+
+<section id="install" class="section">
+  <p class="eyebrow">ติดตั้ง</p>
+  <h2>เริ่มใช้ได้ใน 4 ขั้นตอน</h2>
+  <ol class="steps">
+    <li><h3>วางไฟล์</h3><p>ใน MT5 เปิด <b>File → Open Data Folder</b> แล้ววาง <code>Hunting.ex5</code> ไว้ใน <code>MQL5\Experts</code></p></li>
+    <li><h3>รีเฟรช</h3><p>คลิกขวาที่ <b>Expert Advisors</b> ในหน้าต่าง Navigator แล้วเลือก <b>Refresh</b></p></li>
+    <li><h3>แนบกับกราฟ</h3><p>ลาก Hunting ลงกราฟ ติ๊ก <b>Allow Algo Trading</b> แล้วเปิดปุ่ม <b>Algo Trading</b> บนแถบเครื่องมือ</p></li>
+    <li><h3>เริ่มล่า</h3><p>เลือกพรีเซ็ตหรือปรับค่าบนแผง แล้วกด <b>เริ่มล่า</b> ทดสอบบนบัญชีเดโมก่อนเสมอ</p></li>
+  </ol>
+</section>
+
+<section id="download" class="section">
+  <p class="eyebrow">ดาวน์โหลด</p>
+  <h2>เวอร์ชันทั้งหมด</h2>
+  <div class="notice" role="note">
+    <h3>เวอร์ชันนี้เป็น Beta</h3>
+    <p>ผ่านการทดสอบตรรกะสัญญาณ พรีเซ็ต และ UI แล้ว แต่<strong>ยังไม่ผ่าน backtest และการส่งคำสั่งจริง</strong> จึงยังไม่มีข้อมูลผลการเทรด ควรทดสอบใน Strategy Tester และบัญชีเดโมก่อน</p>
+  </div>
+  <div id="versions" class="versions"><p class="muted">กำลังโหลดรายการเวอร์ชัน...</p></div>
+</section>
+
+<section class="section risk">
+  <h2>คำเตือนความเสี่ยง</h2>
+  <p>การเทรดมีความเสี่ยงและอาจขาดทุนเกินกว่าที่คาดไว้ Hunting เป็นเครื่องมือช่วยเทรดอัตโนมัติ ไม่ได้รับประกันผลกำไร และเนื้อหาในเว็บนี้ไม่ใช่คำแนะนำการลงทุน ผู้ใช้เป็นผู้รับผิดชอบการตั้งค่าและผลการเทรดของตนเอง</p>
+</section>
+</main>
+
+<footer class="footer">
+  <img src="assets/img/hunting-logo-64.png" alt="" width="28" height="28">
+  <span>Hunting by BAGIDEA</span>
+</footer>
+<script src="assets/app.js"></script>
+</body>
+</html>
