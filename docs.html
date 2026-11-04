@@ -1,0 +1,471 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>เอกสาร Hunting | BAGIDEA</title>
+<meta name="description" content="คู่มือ Hunting EA ฉบับเต็ม: การติดตั้ง สัญญาณแท่งเทียน Trend Zone การปิดไม้ ความเสี่ยง พรีเซ็ต และทุกการตั้งค่า">
+<meta name="theme-color" content="#0b0f14">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/img/hunting-logo-32.png">
+<link rel="apple-touch-icon" href="assets/img/hunting-logo-192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<a class="skip" href="#main">ข้ามไปเนื้อหา</a>
+
+<header class="nav">
+  <a class="brand" href="index.html">
+    <img src="assets/img/hunting-logo-64.png" alt="" width="32" height="32">
+    <span>HUNTING</span>
+  </a>
+  <nav aria-label="เมนูหลัก">
+    <a href="index.html">หน้าแรก</a>
+    <a class="nav-current" href="docs.html" aria-current="page">เอกสาร</a>
+    <a class="nav-cta" href="index.html#download">ดาวน์โหลด</a>
+  </nav>
+</header>
+
+<div class="doc-layout">
+  <details class="doc-toc" id="toc" open>
+    <summary>สารบัญ</summary>
+    <ol>
+      <li><a href="#overview">ภาพรวม</a></li>
+      <li><a href="#install">ติดตั้งและเริ่มใช้งาน</a></li>
+      <li><a href="#flow">EA ตัดสินใจอย่างไร</a></li>
+      <li><a href="#signals">สัญญาณแท่งเทียน</a></li>
+      <li><a href="#zones">Trend Zone</a></li>
+      <li><a href="#exit">การปิดไม้</a></li>
+      <li><a href="#filter">กรองสัญญาณแท่งเทียน</a></li>
+      <li><a href="#panel">แผงควบคุม</a></li>
+      <li><a href="#home">หน้าหลัก</a></li>
+      <li><a href="#strategy">หน้ากลยุทธ์</a></li>
+      <li><a href="#zone-page">หน้าโซน</a></li>
+      <li><a href="#risk">หน้าความเสี่ยง</a></li>
+      <li><a href="#presets">หน้าพรีเซ็ต</a></li>
+      <li><a href="#system">หน้าระบบ</a></li>
+      <li><a href="#state">การจำค่าและการรีสตาร์ท</a></li>
+      <li><a href="#tester">Strategy Tester</a></li>
+      <li><a href="#reference">ตารางค่าทั้งหมด</a></li>
+      <li><a href="#status">ข้อความสถานะ</a></li>
+      <li><a href="#faq">คำถามที่พบบ่อย</a></li>
+      <li><a href="#limits">สถานะการทดสอบ</a></li>
+    </ol>
+  </details>
+
+  <main class="doc" id="main">
+    <header>
+      <p class="eyebrow">เอกสาร</p>
+      <h1>คู่มือ Hunting</h1>
+      <p class="lead">ทุกความสามารถของ EA และทุกการตั้งค่า อธิบายตามการทำงานจริงของเวอร์ชัน 1.02 Beta</p>
+    </header>
+
+    <div class="callout warn">
+      <strong>เป็นเวอร์ชัน Beta:</strong> ส่วนเปิดและปิดไม้ยังไม่เคยทดสอบกับบัญชีจริงหรือบัญชีเดโม ควรทดสอบบนบัญชีเดโมก่อนเสมอ ดู<a class="link" href="#limits">สถานะการทดสอบ</a>
+    </div>
+
+    <section id="overview">
+      <h2>ภาพรวม</h2>
+      <p>Hunting คือ Expert Advisor สำหรับ MetaTrader 5 แยกหน้าที่ออกเป็น 2 ส่วนชัดเจน:</p>
+      <ul>
+        <li><strong>เปิดไม้:</strong> มาจากสัญญาณแท่งเทียน 3 แบบเท่านั้น</li>
+        <li><strong>ปิดไม้:</strong> มาจาก SL/TP และ Trend Zone 4 สี</li>
+      </ul>
+      <p>EA ตรวจสัญญาณครั้งเดียวต่อแท่ง จากแท่งที่ปิดแล้วเท่านั้น สัญญาณจึงไม่เปลี่ยนไปมาระหว่างแท่ง ใช้ได้ทั้งบัญชี Hedging และ Netting และตั้งค่าได้จากแผงควบคุมบนกราฟ</p>
+    </section>
+
+    <section id="install">
+      <h2>ติดตั้งและเริ่มใช้งาน</h2>
+      <ol class="flow">
+        <li>ดาวน์โหลด <code>Hunting.ex5</code> จาก<a class="link" href="index.html#download">หน้าดาวน์โหลด</a> และเทียบค่า SHA-256 ได้ถ้าต้องการ</li>
+        <li>ใน MT5 เปิด <b>File → Open Data Folder</b> แล้ววางไฟล์ไว้ใน <code>MQL5\Experts</code></li>
+        <li>คลิกขวาที่ <b>Expert Advisors</b> ในหน้าต่าง Navigator แล้วเลือก <b>Refresh</b></li>
+        <li>ลาก Hunting ลงกราฟ ติ๊ก <b>Allow Algo Trading</b> แล้วเปิดปุ่ม <b>Algo Trading</b> บนแถบเครื่องมือ</li>
+        <li>เลือกพรีเซ็ตหรือปรับค่าบนแผง แล้วกด <b>เริ่มล่า</b></li>
+      </ol>
+      <div class="callout"><strong>เริ่มแบบหยุดอยู่เสมอ:</strong> แนบ EA แล้วจะยังไม่เปิดไม้จนกว่าจะกด "เริ่มล่า" และหลังจากกดแล้ว จะรอแท่งใหม่ก่อน จึงไม่เข้าไม้จากสัญญาณเก่า</div>
+      <h3>ค่าเริ่มต้น</h3>
+      <p>เทรดทั้ง Buy และ Sell, เปิดสัญญาณครบ 3 แบบ, 0.01 Lot, SL 500 จุด, TP 1,000 จุด, ถือทีละไม้, ปิดไม้เมื่อโซนเปลี่ยนเป็นสีตรงข้าม และไม่กรองสีตอนเข้าไม้</p>
+      <div class="callout"><strong>"จุด" คือ Point ของโบรกเกอร์:</strong> ขนาดต่างกันตามสินทรัพย์และจำนวนทศนิยม ค่า 500 จุดบนคู่เงินกับบนทองคำเป็นระยะราคาไม่เท่ากัน ควรปรับ SL/TP ให้เหมาะกับสินทรัพย์ที่เทรด</div>
+    </section>
+
+    <section id="flow">
+      <h2>EA ตัดสินใจอย่างไร</h2>
+      <p>เมื่อเกิดแท่งใหม่ EA จะทำงานตามลำดับนี้ ถ้าไม่ผ่านข้อใดจะหยุดรอแท่งถัดไป:</p>
+      <ol class="flow">
+        <li>ถ้า EA หยุดอยู่ จบทันที ไม่ปิดและไม่เปิดไม้</li>
+        <li>อ่านสีโซนของ 2 แท่งล่าสุดที่ปิดแล้ว ถ้าสีเปลี่ยนตามเงื่อนไข จะ<strong>ปิดไม้</strong></li>
+        <li>ตรวจขีดจำกัดขาดทุนรายวัน</li>
+        <li>ตรวจเวลาเทรด</li>
+        <li>ตรวจ Spread</li>
+        <li>หาสัญญาณแท่งเทียน</li>
+        <li>ตรวจตัวกรองสี ถ้าเปิดใช้อยู่</li>
+        <li>ตรวจว่าสัญลักษณ์เทรดฝั่งนี้ได้ จำนวนไม้ และระยะห่าง</li>
+        <li>ตรวจระยะ SL/TP ตามข้อกำหนดโบรกเกอร์ และ Margin</li>
+        <li>ส่งคำสั่งที่ราคาตลาด</li>
+      </ol>
+      <p>การปิดไม้อยู่ก่อนตัวกรองการเข้าไม้ เช่น นอกเวลาเทรดหรือ Spread กว้าง EA จะไม่เปิดไม้ใหม่ แต่ยังปิดไม้ตามโซนได้</p>
+    </section>
+
+    <section id="signals">
+      <h2>สัญญาณแท่งเทียน</h2>
+      <p>ทั้ง 3 แบบเปิดปิดแยกกันได้ ฝั่ง Sell เป็นภาพสะท้อนของฝั่ง Buy ภาพด้านล่างแสดงฝั่ง Buy โดยแท่งขวาสุดคือแท่งสัญญาณที่เพิ่งปิด</p>
+      <div class="patterns">
+        <article class="pattern">
+          <svg viewBox="0 0 120 90" role="img" aria-label="แท่งแดงเล็ก 2 แท่ง ตามด้วยแท่งเขียวใหญ่">
+            <g fill="#ff4d6a" stroke="#ff4d6a"><path d="M25 22V46M60 34V58"/><rect x="18" y="30" width="14" height="8"/><rect x="53" y="42" width="14" height="8"/></g>
+            <g fill="#00e676" stroke="#00e676"><path d="M95 12V76"/><rect x="88" y="20" width="14" height="48"/></g>
+          </svg>
+          <div>
+            <h3>Doji Reversal</h3>
+            <p><strong>Buy:</strong> แดงเล็ก 2 แท่งติดกัน แล้วตามด้วยแท่งเขียว "แท่งเล็ก" คือแท่งที่เนื้อเทียนหารความยาวทั้งแท่งได้น้อยกว่าค่า <em>สัดส่วนแท่งเล็ก</em></p>
+            <p>ถ้าเปิด <em>เฉพาะแท่งกลับตัวที่แข็งแรง</em> แท่งเขียวต้องมีเนื้อใหญ่กว่าแท่งเล็กทั้งคู่</p>
+          </div>
+        </article>
+        <article class="pattern">
+          <svg viewBox="0 0 120 90" role="img" aria-label="แท่งเขียวเล็ก ตามด้วยแท่งเขียวใหญ่กว่าที่ปิดสูงกว่า">
+            <g fill="#00e676" stroke="#00e676"><path d="M40 34V72M80 12V62"/><rect x="33" y="44" width="14" height="20"/><rect x="73" y="20" width="14" height="36"/></g>
+          </svg>
+          <div>
+            <h3>Trend Continuation</h3>
+            <p><strong>Buy:</strong> เขียว 2 แท่งติดกัน โดยแท่งล่าสุดมี Low สูงกว่า ปิดสูงกว่า และเนื้อใหญ่กว่าแท่งก่อน</p>
+            <p>ถ้าเปิด <em>Engulfing แบบเข้ม</em> ราคาเปิดของแท่งล่าสุดต้องไม่สูงกว่าราคาเปิดของแท่งก่อน</p>
+          </div>
+        </article>
+        <article class="pattern">
+          <svg viewBox="0 0 120 90" role="img" aria-label="แท่งไส้ล่างยาว ตามด้วยแท่งเขียวที่ปิดเหนือ High">
+            <g fill="#9aa8b8" stroke="#9aa8b8"><path d="M40 34V84"/><rect x="33" y="40" width="14" height="8"/></g>
+            <path d="M12 34H108" stroke="#2a3644" stroke-dasharray="4 4"/>
+            <g fill="#00e676" stroke="#00e676"><path d="M80 12V60"/><rect x="73" y="20" width="14" height="32"/></g>
+          </svg>
+          <div>
+            <h3>Pin Bar Breakout</h3>
+            <p><strong>Buy:</strong> แท่งก่อนหน้ามีไส้ล่างยาวกว่าเนื้อเทียนคูณ <em>สัดส่วนไส้ Pin Bar</em> จากนั้นแท่งล่าสุดเป็นสีเขียวและปิดเหนือ High ของแท่งนั้น</p>
+            <p>แท่งที่มีไส้เป็นสีอะไรก็ได้</p>
+          </div>
+        </article>
+      </div>
+      <p>ในแท่งเดียวกันจะมีสัญญาณได้ฝั่งเดียว เพราะแท่งสัญญาณมีสีเดียว ถ้าเข้าเงื่อนไขหลายแบบ ชื่อที่บันทึกจะเรียงตาม Doji Reversal, Trend Continuation แล้วจึง Pin Bar</p>
+    </section>
+
+    <section id="zones">
+      <h2>Trend Zone</h2>
+      <p>แต่ละแท่งมีสีเดียวจาก 4 สี คำนวณจาก EMA เร็ว (ค่าเริ่มต้น 12), EMA ช้า (ค่าเริ่มต้น 26) และราคาปิด</p>
+      <div class="table-wrap"><table>
+        <thead><tr><th>สี</th><th>เงื่อนไข</th><th>ความหมาย</th></tr></thead>
+        <tbody>
+          <tr class="z-green"><td><span class="swatch"></span>เขียว</td><td>EMA เร็ว &gt; EMA ช้า และราคาปิด &gt;= EMA เร็ว</td><td>ขาขึ้นชัดเจน</td></tr>
+          <tr class="z-yellow"><td><span class="swatch"></span>เหลือง</td><td>EMA เร็ว &gt; EMA ช้า และราคาปิด &lt; EMA เร็ว</td><td>ยังขาขึ้น แต่เริ่มอ่อนแรง</td></tr>
+          <tr class="z-red"><td><span class="swatch"></span>แดง</td><td>EMA เร็ว &lt;= EMA ช้า และราคาปิด &lt;= EMA เร็ว</td><td>ขาลงชัดเจน</td></tr>
+          <tr class="z-blue"><td><span class="swatch"></span>ฟ้า</td><td>EMA เร็ว &lt;= EMA ช้า และราคาปิด &gt; EMA เร็ว</td><td>ยังขาลง แต่เริ่มฟื้น</td></tr>
+        </tbody>
+      </table></div>
+      <div class="callout"><strong>โซนไม่เปิดไม้:</strong> สีใช้สำหรับปิดไม้ และใช้กรองสัญญาณถ้าเลือกเปิดตัวกรองเท่านั้น สีไม่สร้างสัญญาณเข้าไม้เอง</div>
+      <p>แท่งที่ยังไม่ปิดเปลี่ยนสีได้ตลอด EA จึงตัดสินจากแท่งที่ปิดแล้วเท่านั้น</p>
+      <figure class="doc-shot">
+        <img src="assets/img/zones-chart.png" alt="กราฟ EURUSD H1 ที่แท่งเทียนเป็นสีตามโซน พร้อมแถบระหว่างเส้น EMA" loading="lazy" width="1100" height="740">
+        <figcaption>แท่งเทียนและแถบ EMA บนกราฟจริง ใช้แสดงลักษณะการแสดงผลเท่านั้น ไม่ได้บอกถึงผลการเทรด</figcaption>
+      </figure>
+      <h3>สลับกราฟโซนกับกราฟปกติ</h3>
+      <p>กดปุ่ม "กราฟโซน / กราฟปกติ" ในหน้าโซน หรือปุ่มแท่งเทียน 4 สีบนหัวแผง มีผลทันทีและเปลี่ยนแค่การแสดงผล การปิดไม้และตัวกรองยังทำงานตามเดิม การโหลดพรีเซ็ตไม่เปลี่ยนมุมมองนี้</p>
+    </section>
+
+    <section id="exit">
+      <h2>การปิดไม้</h2>
+      <p>ทุกไม้มี SL/TP ตามที่ตั้งไว้ และเลือกให้ปิดตามโซนเพิ่มได้ 3 โหมด:</p>
+      <div class="table-wrap"><table>
+        <thead><tr><th>โหมด</th><th>ปิด Buy เมื่อเปลี่ยนเป็น</th><th>ปิด Sell เมื่อเปลี่ยนเป็น</th><th>เหมาะกับ</th></tr></thead>
+        <tbody>
+          <tr><td>SL/TP เท่านั้น</td><td>ไม่ปิดตามสี</td><td>ไม่ปิดตามสี</td><td>ปล่อยให้ถึงเป้า</td></tr>
+          <tr><td>โซนตรงข้าม (ค่าเริ่มต้น)</td><td>แดง</td><td>เขียว</td><td>ให้เวลาเทรนด์ แต่คืนกำไรมากกว่า</td></tr>
+          <tr><td>สีเตือนแรก</td><td>เหลือง หรือแดง</td><td>ฟ้า หรือเขียว</td><td>ออกเร็ว แต่โดนสะบัดออกบ่อยกว่า</td></tr>
+        </tbody>
+      </table></div>
+      <h3>ตัวอย่าง</h3>
+      <p>Buy เปิดอยู่ แล้วสีเป็น เขียว → เหลือง → เขียว → เหลือง → แดง</p>
+      <ul>
+        <li><strong>โซนตรงข้าม:</strong> ถือจนถึงแดง</li>
+        <li><strong>สีเตือนแรก:</strong> ปิดที่เหลืองครั้งแรก</li>
+      </ul>
+      <h3>กฎสำคัญ</h3>
+      <ul>
+        <li><strong>ปิดเฉพาะตอนสีเปลี่ยน:</strong> Buy ที่เปิดระหว่างสีแดงจะไม่ถูกปิดในแท่งถัดไป จะถูกปิดเมื่อสีออกจากแดงแล้วกลับมาแดงอีกครั้ง หรือเมื่อถึง SL/TP</li>
+        <li><strong>ราคาปิดไม้:</strong> สีตัดสินเมื่อแท่งปิด คำสั่งปิดจึงเกิดตอนแท่งใหม่เริ่ม ที่ราคาตลาดตอนนั้น</li>
+        <li><strong>ตอนกดหยุด EA:</strong> การปิดตามโซนหยุดด้วย ไม้ที่เปิดอยู่เหลือแค่ SL/TP หรือปิดเองด้วยปุ่ม "ปิดไม้ทั้งหมด"</li>
+        <li><strong>ถ้า MT5 ปิดอยู่ตอนสีเปลี่ยน:</strong> EA จะไม่เห็นการเปลี่ยนสีนั้น ไม้จะถือต่อจนการเปลี่ยนสีครั้งถัดไปหรือ SL/TP</li>
+        <li><strong>ปิดเฉพาะไม้ของตัวเอง:</strong> นับจาก Symbol และ Magic Number ไม้ที่เปิดเองหรือมาจาก EA อื่นจะไม่ถูกปิด</li>
+      </ul>
+    </section>
+
+    <section id="filter">
+      <h2>กรองสัญญาณแท่งเทียน</h2>
+      <p>ตัวกรองไม่สร้างสัญญาณ ทำหน้าที่แค่ตัดสัญญาณที่สีไม่ตรงออก โดยดูสีของแท่งสัญญาณที่เพิ่งปิด</p>
+      <div class="table-wrap"><table>
+        <thead><tr><th>ตัวเลือก</th><th>Buy เข้าได้ในสี</th><th>Sell เข้าได้ในสี</th></tr></thead>
+        <tbody>
+          <tr><td>ปิด (ค่าเริ่มต้น)</td><td>ทุกสี</td><td>ทุกสี</td></tr>
+          <tr><td>เขียว/แดง</td><td>เขียว</td><td>แดง</td></tr>
+          <tr><td>ตามเทรนด์ EMA</td><td>เขียว เหลือง</td><td>แดง ฟ้า</td></tr>
+        </tbody>
+      </table></div>
+      <div class="callout warn"><strong>ทำไมเครื่องหมายไม้อาจอยู่บนแท่งสีอื่น:</strong> EA ดูสีจากแท่งที่เพิ่งปิด แล้วส่งคำสั่งตอนแท่งใหม่เริ่ม เครื่องหมายไม้ของ MT5 จึงอยู่บนแท่งใหม่ ซึ่งอาจกลายเป็นสีเหลืองทีหลัง แม้ตั้งเขียว/แดงไว้ ส่วนลูกศรของ EA จะอยู่บนแท่งสัญญาณ</div>
+      <p>ตัวกรองทำให้เข้าไม้น้อยลง ควรลองทั้งแบบเปิดและปิดใน Strategy Tester ก่อนเลือกใช้</p>
+    </section>
+
+    <section id="panel">
+      <h2>แผงควบคุม</h2>
+      <ul>
+        <li><strong>ย้าย:</strong> ลากที่หัวแผง ตำแหน่งถูกจำไว้แยกตามกราฟ</li>
+        <li><strong>ย่อ:</strong> กดปุ่ม <code>-</code> มุมขวาบน</li>
+        <li><strong>เลื่อน:</strong> ใช้ลูกกลิ้งเมาส์ เมื่อแผงสูงกว่ากราฟ</li>
+        <li><strong>ปรับตัวเลข:</strong> กดปุ่ม <code>-</code> หรือ <code>+</code> ทีละขั้น หรือคลิกที่ตัวเลขแล้วพิมพ์</li>
+        <li><strong>การบันทึก:</strong> ค่าที่เปลี่ยนมีผลทันทีและถูกบันทึกอัตโนมัติ ไม่ต้องกดบันทึก</li>
+      </ul>
+      <div class="callout warn"><strong>ปัญหาที่ทราบใน v1.02:</strong> ช่องตัวเลขพิมพ์ไม่ได้ ระหว่างนี้ใช้ปุ่ม <code>-</code> และ <code>+</code> แทน หรือแก้ค่าในหน้าต่าง Inputs ของ EA แก้แล้วในโค้ดและจะมาในเวอร์ชันถัดไป เวอร์ชันนั้นคลิกครั้งเดียวแล้วพิมพ์ได้เลย ใช้แป้นตัวเลขแบบอังกฤษ และถ้ากรอกสิ่งที่ไม่ใช่ตัวเลข ค่าเดิมจะไม่เปลี่ยน</div>
+    </section>
+
+    <section id="home">
+      <h2>หน้าหลัก</h2>
+      <figure class="doc-panel"><img src="assets/img/panel-home.png" alt="แผงควบคุมหน้าหลัก" loading="lazy"></figure>
+      <ul>
+        <li><strong>เริ่มล่า / หยุดล่าชั่วคราว:</strong> อนุญาตหรือหยุดการทำงานของ EA</li>
+        <li><strong>กำไร/ขาดทุนลอย:</strong> ไม้ที่เปิดอยู่ รวม Swap</li>
+        <li><strong>วันนี้ (ปิดแล้ว):</strong> กำไรขาดทุนที่ปิดแล้ววันนี้ รวม Swap และค่าคอมมิชชัน</li>
+        <li><strong>ไม้ที่เปิดอยู่:</strong> จำนวนปัจจุบันต่อจำนวนสูงสุด</li>
+        <li><strong>Spread:</strong> เป็นสีเตือนเมื่อเกินค่าที่ตั้ง</li>
+        <li><strong>ข้อมูลอื่น:</strong> สัญลักษณ์, ทิศทาง, รูปแบบที่เปิด, โซนปัจจุบัน, ชนิดบัญชี, สถานะ และสัญญาณล่าสุด</li>
+        <li><strong>ปิดไม้ทั้งหมด:</strong> กด 2 ครั้งเพื่อยืนยัน ปิดเฉพาะไม้ของ EA ตัวนี้บน Symbol นี้</li>
+      </ul>
+      <p>กล่องแจ้งเตือนจะขึ้นเมื่อ Algo Trading ปิดอยู่, ถึงขีดจำกัดรายวัน, ไม่ได้เปิดรูปแบบสัญญาณ, บัญชี Netting ถูกจำกัดที่ 1 ไม้, ระยะห่างกว้างเกินจนแทบไม่เปิดไม้เพิ่ม หรือไม่ได้ตั้ง Stop Loss</p>
+      <div class="doc-clear"></div>
+    </section>
+
+    <section id="strategy">
+      <h2>หน้ากลยุทธ์</h2>
+      <figure class="doc-panel"><img src="assets/img/panel-strategy.png" alt="แผงควบคุมหน้ากลยุทธ์" loading="lazy"></figure>
+      <ul>
+        <li><strong>ทิศทาง:</strong> Buy เท่านั้น, Sell เท่านั้น หรือ Buy + Sell</li>
+        <li><strong>รูปแบบสัญญาณ:</strong> เปิดปิด Doji Reversal, Trend Continuation และ Pin Bar Breakout</li>
+        <li><strong>สัดส่วนแท่งเล็ก:</strong> ค่ามากขึ้น แท่งนับเป็น "แท่งเล็ก" ง่ายขึ้น จึงเกิดสัญญาณ Doji มากขึ้น</li>
+        <li><strong>สัดส่วนไส้ Pin Bar:</strong> ค่ามากขึ้น ต้องมีไส้ยาวขึ้น จึงเกิดสัญญาณน้อยลง</li>
+        <li><strong>Engulfing แบบเข้ม:</strong> เปิดแล้ว Trend Continuation จะเกิดน้อยลง</li>
+        <li><strong>เฉพาะแท่งกลับตัวที่แข็งแรง:</strong> เปิดแล้ว Doji Reversal จะเกิดน้อยลง</li>
+      </ul>
+      <div class="doc-clear"></div>
+    </section>
+
+    <section id="zone-page">
+      <h2>หน้าโซน</h2>
+      <figure class="doc-panel"><img src="assets/img/panel-zone.png" alt="แผงควบคุมหน้าโซน" loading="lazy"></figure>
+      <ul>
+        <li><strong>คำอธิบายสี:</strong> ความหมายของแต่ละสี</li>
+        <li><strong>กราฟโซน / กราฟปกติ:</strong> สลับการแสดงผล</li>
+        <li><strong>EMA Fast และ EMA Slow:</strong> เส้นที่ใช้คำนวณสี EMA เร็วต้องน้อยกว่า EMA ช้าเสมอ ถ้าตั้งเกิน EA จะปรับให้เอง</li>
+        <li><strong>การปิดไม้:</strong> ดู<a class="link" href="#exit">การปิดไม้</a></li>
+        <li><strong>กรองสัญญาณแท่งเทียน:</strong> ดู<a class="link" href="#filter">ตัวกรอง</a></li>
+      </ul>
+      <p>EMA ค่าน้อยทำให้สีเปลี่ยนไวขึ้น EMA ค่ามากทำให้สีนิ่งขึ้นแต่ตอบสนองช้าลง</p>
+      <div class="doc-clear"></div>
+    </section>
+
+    <section id="risk">
+      <h2>หน้าความเสี่ยง</h2>
+      <figure class="doc-panel"><img src="assets/img/panel-risk.png" alt="แผงควบคุมหน้าความเสี่ยง" loading="lazy"></figure>
+      <h3>ขนาดไม้และเป้าหมาย</h3>
+      <ul>
+        <li><strong>ขนาด Lot:</strong> คงที่ทุกไม้ EA จะปรับให้ตรงขั้นต่ำ ขั้นสูงสุด และขั้นการเพิ่มของโบรกเกอร์</li>
+        <li><strong>Stop Loss และ Take Profit:</strong> นับเป็นจุดจากราคาเข้า ตั้ง 0 คือไม่ใช้ ถ้าใกล้เกินข้อกำหนดโบรกเกอร์ EA จะไม่เปิดไม้</li>
+      </ul>
+      <h3>การถือไม้</h3>
+      <ul>
+        <li><strong>ทีละไม้:</strong> เปิดใหม่ไม่ได้จนกว่าไม้เดิมจะปิด</li>
+        <li><strong>ซ้อนไม้:</strong> เปิดเพิ่มได้ถึง <em>จำนวนไม้สูงสุด</em> ซึ่งนับรวมทั้งสองฝั่ง</li>
+        <li><strong>ระยะห่างขั้นต่ำ:</strong> ไม้ใหม่ต้องห่างจากราคาเปิดของไม้ฝั่งเดียวกันทุกไม้ อย่างน้อยเท่าค่านี้ ตั้ง 0 คือไม่จำกัด</li>
+        <li><strong>บัญชี Netting:</strong> ถือได้ 1 ไม้ และถ้า Symbol นี้มีไม้อื่นเปิดอยู่ แม้เปิดเอง EA จะไม่เปิดเพิ่ม เพราะคำสั่งจะไปรวมหรือกลับฝั่งกับไม้เดิม</li>
+      </ul>
+      <h3>ตัวกรองและการป้องกัน</h3>
+      <ul>
+        <li><strong>Spread สูงสุด:</strong> ถ้า Spread เกินตอนเปิดแท่งใหม่ จะไม่เปิดไม้ในแท่งนั้น ตั้ง 0 คือปิด</li>
+        <li><strong>จำกัดขาดทุนรายวัน:</strong> เมื่อขาดทุนวันนี้ของ EA ทั้งที่ปิดแล้วและยังลอยถึงเปอร์เซ็นต์ที่ตั้งเทียบกับยอดต้นวัน จะงดเปิดไม้ใหม่ <strong>แต่ไม่ปิดไม้ที่เปิดอยู่ให้</strong> ตั้ง 0 คือปิด</li>
+        <li><strong>เวลาเทรด:</strong> ใช้เวลาเซิร์ฟเวอร์ของโบรกเกอร์ ถ้าเวลาเริ่มมากกว่าเวลาสิ้นสุดจะข้ามเที่ยงคืน เช่น 22 ถึง 5 ถ้าเท่ากันจะเทรดตลอด ชั่วโมงสิ้นสุดไม่นับรวม</li>
+      </ul>
+      <div class="doc-clear"></div>
+    </section>
+
+    <section id="presets">
+      <h2>หน้าพรีเซ็ต</h2>
+      <figure class="doc-panel"><img src="assets/img/panel-presets.png" alt="แผงควบคุมหน้าพรีเซ็ต" loading="lazy"></figure>
+      <h3>พรีเซ็ตสำเร็จรูป</h3>
+      <p>กดแล้วค่ากลยุทธ์ทั้งหมดจะกลับเป็นค่าเริ่มต้นก่อน แล้วจึงใช้ค่าของพรีเซ็ต ค่าที่ปรับไว้เองจึงหายไป ควรบันทึกไว้ก่อน</p>
+      <div class="doc-clear"></div>
+      <div class="table-wrap"><table>
+        <thead><tr><th>พรีเซ็ต</th><th>ทิศทาง</th><th>สัญญาณ</th><th>SL / TP</th><th>การถือไม้</th><th>ปิดตามโซน</th></tr></thead>
+        <tbody>
+          <tr><td>Hunting Default</td><td>ทั้งคู่</td><td>ครบ 3 แบบ แบบเข้ม</td><td>500 / 1000</td><td>ทีละไม้</td><td>โซนตรงข้าม</td></tr>
+          <tr><td>Classic Buy</td><td>Buy</td><td>Doji, Continuation</td><td>300 / 600</td><td>ทีละไม้</td><td>ไม่ใช้</td></tr>
+          <tr><td>Classic Sell</td><td>Sell</td><td>Doji, Continuation</td><td>300 / 600</td><td>ทีละไม้</td><td>ไม่ใช้</td></tr>
+          <tr><td>Classic Buy + Sell</td><td>ทั้งคู่</td><td>Doji, Continuation</td><td>300 / 600</td><td>ทีละไม้</td><td>ไม่ใช้</td></tr>
+          <tr><td>Buy Stacking</td><td>Buy</td><td>Doji, Continuation</td><td>300 / 600</td><td>ซ้อนไม้ ระยะ 0</td><td>ไม่ใช้</td></tr>
+          <tr><td>Sell Pin Bar Stacking</td><td>Sell</td><td>ครบ 3 แบบ</td><td>500 / 1000</td><td>ซ้อนไม้ ระยะ 0</td><td>ไม่ใช้</td></tr>
+          <tr><td>Distance Grid Buy + Sell</td><td>ทั้งคู่</td><td>ครบ 3 แบบ</td><td>500 / 1000</td><td>ซ้อนไม้ ระยะ 300</td><td>ไม่ใช้</td></tr>
+          <tr><td>Patterns + Zone Filter</td><td>ทั้งคู่</td><td>ครบ 3 แบบ แบบเข้ม กรองเขียว/แดง</td><td>500 / 1000</td><td>ทีละไม้</td><td>โซนตรงข้าม</td></tr>
+        </tbody>
+      </table></div>
+      <p>"แบบเข้ม" คือเปิด Engulfing แบบเข้มและแท่งกลับตัวที่แข็งแรง ส่วนพรีเซ็ตอื่นปิดทั้งสองตัวนี้</p>
+      <h3>บันทึกและส่งออก</h3>
+      <p>พิมพ์ชื่อแล้วกด "บันทึก / ส่งออก" EA จะสร้าง 2 ไฟล์ในโฟลเดอร์ที่ทุก Terminal ในเครื่องใช้ร่วมกัน:</p>
+      <p><code>Terminal\Common\Files\BAGIDEA\Hunting\Presets</code></p>
+      <ul>
+        <li><code>.json</code> สำหรับแชร์และโหลดกลับเข้า EA</li>
+        <li><code>.set</code> สำหรับใช้ใน Strategy Tester และโหลดเข้า EA ได้เช่นกัน</li>
+      </ul>
+      <h3>นำเข้าและลบ</h3>
+      <ul>
+        <li><strong>นำเข้า:</strong> วางไฟล์ในโฟลเดอร์ด้านบน แล้วกดแท็บ "พรีเซ็ต" อีกครั้งเพื่ออัปเดตรายการ จากนั้นคลิกชื่อเพื่อโหลด</li>
+        <li><strong>ลบ:</strong> เลือกพรีเซ็ตของฉัน แล้วกด "ลบที่เลือก" 2 ครั้ง ไฟล์ .json และ .set จะถูกลบคู่กัน</li>
+        <li><strong>ค่าที่พรีเซ็ตไม่เปลี่ยน:</strong> Magic Number, ภาษา, ขนาดแผง และมุมมองกราฟ เพราะเป็นค่าของกราฟนั้น</li>
+        <li><strong>ไฟล์ที่รับมาจากคนอื่น:</strong> ค่าที่อยู่นอกขอบเขตจะถูกปรับให้อยู่ในขอบเขต และไฟล์ที่ไม่ใช่ของ Hunting จะไม่ถูกโหลด ควรตรวจค่าทุกครั้งก่อนกดเริ่มล่า</li>
+        <li><strong>พรีเซ็ตเก่าจากก่อน v1.02:</strong> ยังโหลดได้ แต่ค่าการเปิดไม้ตามโซนจะถูกข้าม ถ้าพรีเซ็ตปิดสัญญาณแท่งเทียนหมด เช่น Zone Trend เดิม EA จะไม่เปิดไม้ และแผงจะแจ้งเตือน</li>
+      </ul>
+    </section>
+
+    <section id="system">
+      <h2>หน้าระบบ</h2>
+      <figure class="doc-panel"><img src="assets/img/panel-system.png" alt="แผงควบคุมหน้าระบบ" loading="lazy"></figure>
+      <ul>
+        <li><strong>ภาษา:</strong> ไทยหรืออังกฤษ</li>
+        <li><strong>ขนาดแผงควบคุม:</strong> เล็ก กลาง ใหญ่</li>
+        <li><strong>ลูกศรจุดเข้าเทรด:</strong> วาดลูกศรบนแท่งสัญญาณเมื่อเปิดไม้สำเร็จ</li>
+        <li><strong>Magic Number:</strong> เลขประจำ EA ถ้ารันหลายกราฟใน Symbol เดียวกัน ต้องใช้เลขต่างกัน ไม่เช่นนั้น EA จะนับและปิดไม้ของกันและกัน</li>
+        <li><strong>คืนค่าเริ่มต้น:</strong> กด 2 ครั้งเพื่อยืนยัน</li>
+      </ul>
+      <div class="doc-clear"></div>
+    </section>
+
+    <section id="state">
+      <h2>การจำค่าและการรีสตาร์ท</h2>
+      <div class="table-wrap"><table>
+        <thead><tr><th>เหตุการณ์</th><th>ค่าที่ใช้</th><th>สถานะ EA</th></tr></thead>
+        <tbody>
+          <tr><td>แนบ EA ใหม่</td><td>Inputs</td><td>หยุดอยู่</td></tr>
+          <tr><td>รีสตาร์ท MT5 หรือเปลี่ยน Timeframe</td><td>ค่าที่บันทึกไว้</td><td>เหมือนก่อนหน้า</td></tr>
+          <tr><td>แก้ค่าในหน้าต่าง Inputs</td><td>Inputs ทับค่าที่บันทึกไว้</td><td>เหมือนก่อนหน้า</td></tr>
+          <tr><td>เปลี่ยนบัญชี</td><td>ค่าที่บันทึกไว้</td><td>หยุดเอง</td></tr>
+          <tr><td>เอา EA ออกจากกราฟ</td><td>ลบค่าที่บันทึกไว้</td><td>-</td></tr>
+        </tbody>
+      </table></div>
+      <div class="callout warn"><strong>รีสตาร์ทแล้ว EA ทำงานต่อเอง:</strong> ถ้ากดเริ่มล่าไว้ก่อนปิด MT5 เปิดใหม่แล้ว EA จะเทรดต่อโดยไม่ต้องกดอีก เมื่อเลิกใช้งานให้กดหยุดก่อน</div>
+    </section>
+
+    <section id="tester">
+      <h2>Strategy Tester</h2>
+      <p>ใน Strategy Tester ไม่มีแผงควบคุม EA ใช้ค่าจาก Inputs และทำงานทันทีโดยไม่ต้องกดเริ่มล่า</p>
+      <ol class="flow">
+        <li>เปิด <b>View → Strategy Tester</b> และเลือก Hunting</li>
+        <li>เลือก Symbol, Timeframe, ช่วงเวลา และโหมดการจำลองราคา</li>
+        <li>แท็บ <b>Inputs</b>: คลิกขวาแล้วเลือก <b>Load</b> เพื่อโหลดไฟล์ <code>.set</code> จากโฟลเดอร์พรีเซ็ต</li>
+        <li>กด <b>Start</b> ต้องล็อกอินบัญชีก่อน จึงจะเริ่มทดสอบได้</li>
+      </ol>
+      <p>ผล backtest ในอดีตไม่รับประกันผลในอนาคต</p>
+    </section>
+
+    <section id="reference">
+      <h2>ตารางค่าทั้งหมด</h2>
+      <p>ทุกค่าตั้งได้ทั้งบนแผงและในหน้าต่าง Inputs ยกเว้นค่าที่ระบุ</p>
+      <div class="table-wrap"><table>
+        <thead><tr><th>ค่า</th><th>Input</th><th>ค่าเริ่มต้น</th><th>ขอบเขต</th><th>ขั้นละ</th></tr></thead>
+        <tbody>
+          <tr><td>ทิศทาง</td><td><code>InpDirection</code></td><td>Buy + Sell</td><td>3 ตัวเลือก</td><td>-</td></tr>
+          <tr><td>Doji Reversal</td><td><code>InpPatDoji</code></td><td>เปิด</td><td>เปิด/ปิด</td><td>-</td></tr>
+          <tr><td>Trend Continuation</td><td><code>InpPatContinuation</code></td><td>เปิด</td><td>เปิด/ปิด</td><td>-</td></tr>
+          <tr><td>Pin Bar Breakout</td><td><code>InpPatPinBar</code></td><td>เปิด</td><td>เปิด/ปิด</td><td>-</td></tr>
+          <tr><td>Engulfing แบบเข้ม</td><td><code>InpStrictEngulf</code></td><td>เปิด</td><td>เปิด/ปิด</td><td>-</td></tr>
+          <tr><td>แท่งกลับตัวที่แข็งแรง</td><td><code>InpStrongReversal</code></td><td>เปิด</td><td>เปิด/ปิด</td><td>-</td></tr>
+          <tr><td>สัดส่วนแท่งเล็ก</td><td><code>InpDojiThreshold</code></td><td>0.40</td><td>0.05 - 0.95</td><td>0.05</td></tr>
+          <tr><td>สัดส่วนไส้ Pin Bar</td><td><code>InpPinTailRatio</code></td><td>2.0</td><td>0.5 - 10</td><td>0.5</td></tr>
+          <tr><td>การปิดไม้ตามโซน</td><td><code>InpZoneExit</code></td><td>โซนตรงข้าม</td><td>3 ตัวเลือก</td><td>-</td></tr>
+          <tr><td>กรองสัญญาณแท่งเทียน</td><td><code>InpZoneFilter</code></td><td>ปิด</td><td>3 ตัวเลือก</td><td>-</td></tr>
+          <tr><td>EMA Fast</td><td><code>InpEmaFast</code></td><td>12</td><td>2 - 500</td><td>1</td></tr>
+          <tr><td>EMA Slow</td><td><code>InpEmaSlow</code></td><td>26</td><td>3 - 1000</td><td>1</td></tr>
+          <tr><td>แสดงโซนบนกราฟ</td><td><code>InpShowZones</code></td><td>เปิด</td><td>เปิด/ปิด</td><td>-</td></tr>
+          <tr><td>ขนาด Lot</td><td><code>InpLot</code></td><td>0.01</td><td>0.01 - 100</td><td>0.01</td></tr>
+          <tr><td>Stop Loss (จุด)</td><td><code>InpStopLoss</code></td><td>500</td><td>0 - 1,000,000</td><td>50</td></tr>
+          <tr><td>Take Profit (จุด)</td><td><code>InpTakeProfit</code></td><td>1000</td><td>0 - 1,000,000</td><td>50</td></tr>
+          <tr><td>การถือไม้</td><td><code>InpPosMode</code></td><td>ทีละไม้</td><td>2 ตัวเลือก</td><td>-</td></tr>
+          <tr><td>จำนวนไม้สูงสุด</td><td><code>InpMaxPositions</code></td><td>10</td><td>1 - 100</td><td>1</td></tr>
+          <tr><td>ระยะห่างขั้นต่ำ (จุด)</td><td><code>InpMinDistance</code></td><td>300</td><td>0 - 1,000,000</td><td>50</td></tr>
+          <tr><td>Spread สูงสุด (จุด)</td><td><code>InpMaxSpread</code></td><td>0 (ปิด)</td><td>0 - 100,000</td><td>5</td></tr>
+          <tr><td>จำกัดเวลาเทรด</td><td><code>InpSessionOn</code></td><td>ปิด</td><td>เปิด/ปิด</td><td>-</td></tr>
+          <tr><td>เริ่ม (ชั่วโมง)</td><td><code>InpSessionStart</code></td><td>8</td><td>0 - 23</td><td>1</td></tr>
+          <tr><td>สิ้นสุด (ชั่วโมง)</td><td><code>InpSessionEnd</code></td><td>22</td><td>0 - 23</td><td>1</td></tr>
+          <tr><td>จำกัดขาดทุนรายวัน (%)</td><td><code>InpDailyLossPct</code></td><td>0 (ปิด)</td><td>0 - 100</td><td>0.5</td></tr>
+          <tr><td>Magic Number</td><td><code>InpMagic</code></td><td>20260</td><td>1 - 2,000,000,000</td><td>1</td></tr>
+          <tr><td>ลูกศรจุดเข้าเทรด</td><td><code>InpDrawArrows</code></td><td>เปิด</td><td>เปิด/ปิด</td><td>-</td></tr>
+          <tr><td>ภาษา</td><td><code>InpLang</code></td><td>ไทย</td><td>2 ตัวเลือก</td><td>-</td></tr>
+          <tr><td>ขนาดแผง</td><td><code>InpUiSize</code></td><td>กลาง</td><td>3 ตัวเลือก</td><td>-</td></tr>
+        </tbody>
+      </table></div>
+    </section>
+
+    <section id="status">
+      <h2>ข้อความสถานะ</h2>
+      <div class="table-wrap"><table>
+        <thead><tr><th>ข้อความบนแผง</th><th>ความหมาย</th><th>สิ่งที่ทำได้</th></tr></thead>
+        <tbody>
+          <tr><td>หยุดอยู่: ไม่เปิดไม้ใหม่</td><td>ยังไม่ได้กดเริ่มล่า</td><td>กดเริ่มล่า</td></tr>
+          <tr><td>รอแท่งเทียนปิด</td><td>รอแท่งใหม่ หรือรอ EMA คำนวณเสร็จ</td><td>รอ</td></tr>
+          <tr><td>แท่งล่าสุดไม่มีสัญญาณ</td><td>ทำงานปกติ แต่ไม่เข้าเงื่อนไข</td><td>รอแท่งถัดไป</td></tr>
+          <tr><td>เปิดไม้แล้ว</td><td>ส่งคำสั่งสำเร็จ</td><td>-</td></tr>
+          <tr><td>ถึงขีดจำกัดขาดทุนรายวัน</td><td>งดเปิดไม้ใหม่</td><td>รอวันใหม่ หรือปรับขีดจำกัด</td></tr>
+          <tr><td>อยู่นอกเวลาเทรด</td><td>นอกช่วงเวลาที่ตั้ง</td><td>ตรวจเวลาเซิร์ฟเวอร์</td></tr>
+          <tr><td>Spread กว้างเกินกำหนด</td><td>เกินค่า Spread สูงสุด</td><td>รอ หรือปรับค่า</td></tr>
+          <tr><td>ไม้เต็มตามที่กำหนด</td><td>ถึงจำนวนไม้สูงสุด</td><td>รอไม้ปิด หรือเพิ่มจำนวน</td></tr>
+          <tr><td>ใกล้ไม้เดิมเกินระยะที่กำหนด</td><td>ไม่ผ่านระยะห่างขั้นต่ำ</td><td>รอราคาห่างออกไป</td></tr>
+          <tr><td>Netting: คู่นี้มีไม้เปิดอยู่แล้ว</td><td>Symbol นี้มีไม้อยู่ในบัญชี Netting</td><td>รอไม้ปิด</td></tr>
+          <tr><td>SL/TP ใกล้เกินข้อกำหนดโบรกเกอร์</td><td>ระยะน้อยกว่าที่โบรกเกอร์กำหนด</td><td>เพิ่ม SL/TP</td></tr>
+          <tr><td>Margin ไม่พอ</td><td>Margin ว่างไม่พอสำหรับ Lot นี้</td><td>ลด Lot หรือเติมเงิน</td></tr>
+          <tr><td>สัญลักษณ์นี้เทรดฝั่งนี้ไม่ได้</td><td>โบรกเกอร์จำกัดการเทรด Symbol หรือฝั่งนี้</td><td>ตรวจกับโบรกเกอร์</td></tr>
+          <tr><td>ออเดอร์ถูกปฏิเสธ: ...</td><td>โบรกเกอร์ไม่รับคำสั่ง พร้อมรหัสสาเหตุ</td><td>ดูรหัสและแท็บ Experts</td></tr>
+        </tbody>
+      </table></div>
+    </section>
+
+    <section id="faq">
+      <h2>คำถามที่พบบ่อย</h2>
+      <h3>ทำไมมีไม้เปิดตรงแท่งสีเหลือง</h3>
+      <p>ค่าเริ่มต้นไม่กรองสี สัญญาณแท่งเทียนจึงเข้าไม้ได้ทุกสี ถ้าไม่ต้องการ ให้ตั้งตัวกรองเป็น "เขียว/แดง" และดู<a class="link" href="#filter">เหตุที่เครื่องหมายไม้อาจอยู่บนแท่งสีอื่น</a></p>
+      <h3>กดเริ่มล่าแล้ว แต่ไม่เปิดไม้</h3>
+      <p>ดูบรรทัดสถานะในหน้าหลัก ตรวจว่าเปิดปุ่ม Algo Trading แล้ว และจำไว้ว่า EA ตรวจเฉพาะตอนเกิดแท่งใหม่ บน Timeframe สูงจึงอาจรอนาน</p>
+      <h3>แก้ SL/TP แล้ว ไม้ที่เปิดอยู่จะเปลี่ยนตามไหม</h3>
+      <p>ไม่เปลี่ยน ค่าใหม่ใช้กับไม้ที่เปิดหลังจากนั้น ถ้าต้องการแก้ไม้เดิม ให้แก้ในแท็บ Trade ของ MT5</p>
+      <h3>รันหลายกราฟพร้อมกันได้ไหม</h3>
+      <p>ได้ คนละ Symbol ใช้ Magic Number เดียวกันได้ แต่ Symbol เดียวกันต้องใช้เลขต่างกัน</p>
+      <h3>เปลี่ยน Timeframe แล้วเกิดอะไรขึ้น</h3>
+      <p>EA ใช้ค่าเดิมและทำงานต่อ แต่จะเริ่มอ่านสัญญาณและสีจาก Timeframe ใหม่</p>
+    </section>
+
+    <section id="limits">
+      <h2>สถานะการทดสอบ</h2>
+      <ul>
+        <li><strong>ทดสอบแล้ว:</strong> ตรรกะสัญญาณ, สีโซน, กฎการปิดตามโซน, พรีเซ็ต และการใช้งานแผงควบคุม ด้วยชุดทดสอบใน MT5</li>
+        <li><strong>ยังไม่ทดสอบ:</strong> การส่งคำสั่งเปิดและปิดไม้จริง, ขีดจำกัดรายวันกับข้อมูลจริง และการเลือก filling mode กับโบรกเกอร์ต่าง ๆ</li>
+        <li><strong>ยังไม่มีผล backtest:</strong> จึงยังไม่มีข้อมูลว่ากลยุทธ์ทำกำไรหรือขาดทุนเท่าไร</li>
+      </ul>
+    </section>
+
+    <section class="risk">
+      <h2>คำเตือนความเสี่ยง</h2>
+      <p>การเทรดมีความเสี่ยงและอาจขาดทุนเกินกว่าที่คาดไว้ Hunting เป็นเครื่องมือช่วยเทรดอัตโนมัติ ไม่ได้รับประกันผลกำไร และเนื้อหาในเว็บนี้ไม่ใช่คำแนะนำการลงทุน ผู้ใช้เป็นผู้รับผิดชอบการตั้งค่าและผลการเทรดของตนเอง</p>
+    </section>
+  </main>
+</div>
+
+<footer class="footer">
+  <img src="assets/img/hunting-logo-64.png" alt="" width="28" height="28">
+  <span>Hunting by BAGIDEA</span>
+</footer>
+<script src="assets/docs.js"></script>
+</body>
+</html>
