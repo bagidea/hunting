@@ -60,7 +60,7 @@
   <h2>ทุกอย่างที่ต้องใช้ อยู่ใน EA เดียว</h2>
   <div class="grid">
     <article class="card"><h3>สัญญาณแท่งเทียน 3 แบบ</h3><p>Doji Reversal, Trend Continuation และ Pin Bar Breakout เปิดปิดแยกกันได้ และปรับความไวได้</p></article>
-    <article class="card"><h3>Trend Zone 4 สี</h3><p>ระบายสีแท่งเทียนจาก EMA 12/26 ใช้กรองสัญญาณ เข้าไม้เมื่อโซนเปลี่ยน และปิดไม้ตามโซนได้</p></article>
+    <article class="card"><h3>Trend Zone 4 สี</h3><p>ระบายสีแท่งเทียนจาก EMA 12/26 ใช้ปิดไม้เมื่อโซนเปลี่ยน และเลือกกรองสัญญาณแท่งเทียนตามสีได้</p></article>
     <article class="card"><h3>เทรดทีละไม้หรือซ้อนไม้</h3><p>กำหนดจำนวนไม้สูงสุดและระยะห่างขั้นต่ำ บนบัญชี Netting ระบบจะจำกัดที่ครั้งละ 1 ไม้ให้เอง</p></article>
     <article class="card"><h3>ตัวป้องกันความเสี่ยง</h3><p>จำกัดขาดทุนรายวัน จำกัด Spread กำหนดเวลาเทรด และตรวจ Margin กับข้อกำหนดโบรกเกอร์ก่อนส่งออเดอร์</p></article>
     <article class="card"><h3>พรีเซ็ตนำเข้า/ส่งออกได้</h3><p>บันทึกการตั้งค่าเป็น .json เพื่อแชร์ และ .set เพื่อใช้ใน Strategy Tester ไฟล์ใช้ร่วมกันได้ทุก Terminal ในเครื่อง</p></article>
@@ -73,9 +73,9 @@
   <h2>อ่านเทรนด์ได้จากสีแท่งเทียน</h2>
   <p class="sub">สีของแต่ละแท่งมาจากความสัมพันธ์ของ EMA เร็ว (12) EMA ช้า (26) และราคาปิด ปรับค่า EMA ได้จากหน้า "โซน"</p>
   <div class="zones">
-    <article class="zone z-green"><span class="candle"></span><div><h3>เขียว: ขาขึ้น</h3><p>EMA 12 อยู่เหนือ EMA 26 และราคาปิดอยู่เหนือ EMA 12</p><small>EA เปิด Buy ได้เมื่อโซนเปลี่ยนเป็นสีนี้</small></div></article>
+    <article class="zone z-green"><span class="candle"></span><div><h3>เขียว: ขาขึ้น</h3><p>EMA 12 อยู่เหนือ EMA 26 และราคาปิดอยู่เหนือ EMA 12</p><small>EA ปิด Sell เมื่อโซนเปลี่ยนเป็นสีนี้</small></div></article>
     <article class="zone z-yellow"><span class="candle"></span><div><h3>เหลือง: ขาขึ้นอ่อนแรง</h3><p>EMA 12 ยังอยู่เหนือ EMA 26 แต่ราคาปิดหลุดต่ำกว่า EMA 12</p><small>สัญญาณเตือน เลือกให้ปิด Buy ที่จุดนี้ได้</small></div></article>
-    <article class="zone z-red"><span class="candle"></span><div><h3>แดง: ขาลง</h3><p>EMA 12 อยู่ใต้ EMA 26 และราคาปิดอยู่ใต้ EMA 12</p><small>EA เปิด Sell ได้เมื่อโซนเปลี่ยนเป็นสีนี้</small></div></article>
+    <article class="zone z-red"><span class="candle"></span><div><h3>แดง: ขาลง</h3><p>EMA 12 อยู่ใต้ EMA 26 และราคาปิดอยู่ใต้ EMA 12</p><small>EA ปิด Buy เมื่อโซนเปลี่ยนเป็นสีนี้</small></div></article>
     <article class="zone z-blue"><span class="candle"></span><div><h3>ฟ้า: ขาลงเริ่มฟื้น</h3><p>EMA 12 ยังอยู่ใต้ EMA 26 แต่ราคาปิดยืนเหนือ EMA 12 ได้</p><small>สัญญาณเตือน เลือกให้ปิด Sell ที่จุดนี้ได้</small></div></article>
   </div>
   <div class="view-switch" role="group" aria-label="สลับมุมมองกราฟ">
@@ -95,9 +95,9 @@
   <div class="tabs" role="tablist" aria-label="หน้าของแผงควบคุม">
     <button role="tab" aria-selected="true" data-shot="panel-home" data-text="ดูสถานะ กำไรขาดทุน จำนวนไม้ และ Spread ได้ในหน้าเดียว พร้อมปุ่มเริ่มหรือหยุด EA และปุ่มปิดไม้ทั้งหมด">หน้าหลัก</button>
     <button role="tab" aria-selected="false" data-shot="panel-strategy" data-text="เลือกทิศทาง Buy, Sell หรือทั้งคู่ เปิดปิดรูปแบบสัญญาณ และปรับความไวของแต่ละแบบ">กลยุทธ์</button>
-    <button role="tab" aria-selected="false" data-shot="panel-zone" data-text="สลับกราฟโซนกับกราฟปกติได้ทันที ตั้งค่า EMA เปิดการเข้าไม้เมื่อโซนเปลี่ยน กรองสัญญาณ และเลือกวิธีปิดไม้">โซน</button>
+    <button role="tab" aria-selected="false" data-shot="panel-zone" data-text="สลับกราฟโซนกับกราฟปกติได้ทันที ตั้งค่า EMA เลือกวิธีปิดไม้ และกรองสัญญาณตามสี">โซน</button>
     <button role="tab" aria-selected="false" data-shot="panel-risk" data-text="กำหนด Lot, SL, TP โหมดซ้อนไม้ Spread สูงสุด ขีดจำกัดขาดทุนรายวัน และเวลาเทรด กดที่ตัวเลขเพื่อพิมพ์ค่าเองได้">ความเสี่ยง</button>
-    <button role="tab" aria-selected="false" data-shot="panel-presets" data-text="ใช้พรีเซ็ตสำเร็จรูป 9 แบบ หรือบันทึกของตัวเองแล้วส่งออกเป็น .json และ .set">พรีเซ็ต</button>
+    <button role="tab" aria-selected="false" data-shot="panel-presets" data-text="ใช้พรีเซ็ตสำเร็จรูป 8 แบบ หรือบันทึกของตัวเองแล้วส่งออกเป็น .json และ .set">พรีเซ็ต</button>
     <button role="tab" aria-selected="false" data-shot="panel-system" data-text="สลับภาษาไทยหรืออังกฤษ ปรับขนาดแผง แสดงลูกศรจุดเข้าเทรด และตั้ง Magic Number">ระบบ</button>
   </div>
   <div class="panel-view">
