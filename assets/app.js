@@ -20,6 +20,19 @@ tabs.forEach((tab, i) => {
   });
 });
 
+// Zone chart / normal chart comparison.
+const chartImg = document.getElementById('chart-img');
+const chartButtons = [...document.querySelectorAll('.view-switch button')];
+chartButtons.forEach((button) => {
+  button.addEventListener('click', () => {
+    chartButtons.forEach((b) => b.setAttribute('aria-pressed', String(b === button)));
+    chartImg.src = `assets/img/${button.dataset.chart}.png`;
+    chartImg.alt = button.dataset.chart === 'zones-chart'
+      ? 'ตัวอย่างกราฟ EURUSD H1 ที่แสดงแท่งเทียนสีตามโซนและแถบ EMA'
+      : 'ตัวอย่างกราฟ EURUSD H1 แบบปกติของ MetaTrader 5';
+  });
+});
+
 // Downloads come from versions.json, so a new release only adds an entry there.
 const REPO = 'https://github.com/bagidea/hunting/releases/download';
 const box = document.getElementById('versions');

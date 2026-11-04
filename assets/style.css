@@ -147,6 +147,19 @@ h2 { font: 700 clamp(28px, 3.6vw, 40px)/1.3 var(--thai); }
 .z-red { --c: var(--red); }
 .z-blue { --c: var(--blue); }
 .zone h3 { color: var(--c); }
+.view-switch { display: inline-flex; gap: 4px; padding: 4px; margin-bottom: 14px; background: var(--surf); border-radius: 12px; }
+.view-switch button {
+  appearance: none;
+  border: 0;
+  cursor: pointer;
+  padding: 8px 22px;
+  border-radius: 9px;
+  background: transparent;
+  color: var(--muted);
+  font: 500 15px var(--thai);
+}
+.view-switch button:hover { color: var(--text); }
+.view-switch button[aria-pressed="true"] { background: var(--grad); color: #04140f; font-weight: 600; }
 .wide-shot { margin: 0; }
 .wide-shot img { width: 100%; border-radius: var(--radius); border: 1px solid var(--line); }
 figcaption { color: var(--muted); font-size: 14px; margin-top: 10px; }
